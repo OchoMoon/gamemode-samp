@@ -19,10 +19,10 @@ jobs:
         chmod +x pawncc
 
     - name: Compile new.pwn
-      run: ./pawncc new.pwn
+      run: ./pawncc new.pwn -d3
 
-    - name: Upload gamemode.amx
+    - name: Upload .amx result
       uses: actions/upload-artifact@v3
       with:
-        name: gamemode
+        name: new-amx
         path: new.amx
