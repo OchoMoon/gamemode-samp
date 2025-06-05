@@ -1,0 +1,28 @@
+name: Compile Pawn
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Pawn Compiler
+      run: |
+        wget https://github.com/pawn-lang/compiler/releases/download/v3.10.9/pawncc-linux.zip
+        unzip pawncc-linux.zip
+        chmod +x pawncc
+
+    - name: Compile new.pwn
+      run: ./pawncc new.pwn
+
+    - name: Upload gamemode.amx
+      uses: actions/upload-artifact@v3
+      with:
+        name: gamemode
+        path: new.amx
